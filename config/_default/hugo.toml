@@ -43,3 +43,7 @@ buildFuture = true
 # [services]
 #   [services.googleAnalytics]
 #     ID = 'G-MEASUREMENT_ID'
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
