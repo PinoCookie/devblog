@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Pepijns devblog</title>
+    <link>//localhost:1313/posts/</link>
+    <description>Recent content in Posts on Pepijns devblog</description>
+    <generator>Hugo -- 0.152.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 Dec 2025 18:20:00 +0100</lastBuildDate>
+    <atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Black Litterman Model</title>
+      <link>//localhost:1313/posts/black-litterman-model/</link>
+      <pubDate>Thu, 04 Dec 2025 18:20:00 +0100</pubDate>
+      <guid>//localhost:1313/posts/black-litterman-model/</guid>
+      <description>IntroductionFor my first project in the “Quant AI” space I started with one of the easier, but still somewhat challenging project of making a Black-Litterman model that would be able to show the best possible stock allocation based on the market data of the last few years.
+</description>
+    </item>
+  </channel>
+</rss>
