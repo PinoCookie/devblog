@@ -435,15 +435,9 @@
 
 </span>
   
-    5 mins
+    6 mins
   
 
-
-  <span class="draft-lbl"><span class="meta-icon">
-
-    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/></svg>
-
-</span>DRAFT</span>
 
 </p>
 
@@ -538,7 +532,12 @@
  </a>
   
 </h4>
-<p>The main part of this project for me was understanding the Black-Litterman model itself.</p>
+<p>The main part of this project for me was understanding the Black-Litterman model itself. It is a sophisticated portfolio allocation framework that improves upon standard Mean-Variance Optimization. Traditional optimization often yields extreme, unintuitive portfolios that are highly sensitive to input estimates. Black-Litterman solves this by using a Bayesian approach to combine two sources of information:</p>
+<ol>
+<li><strong>The Market Equilibrium (The Prior)</strong>: It assumes the market is efficient and that the current market capitalization weights reflect the consensus expected returns. This provides a stable, neutral starting point.</li>
+<li><strong>Investor Views (The Likelihood)</strong>: It allows the investor to express specific absolute or relative views on certain assets (e.g., &ldquo;Tech will outperform Energy by 5%&rdquo;), along with a confidence level for each view.</li>
+</ol>
+<p>The formula below calculates the <strong>Posterior Expected Returns</strong> (Result of the Black-Litterman model), which is a weighted average of the market equilibrium and the investor&rsquo;s views:</p>
 $$
 E(R) = \left[ (\tau \Sigma)^{-1} + P^{T} \Omega^{-1} P \right]^{-1} 
        \left[ (\tau \Sigma)^{-1} \Pi + P^{T} \Omega^{-1} Q \right]
@@ -584,7 +583,7 @@ $$<p>Where:</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>current_year_data <span style="color:#f92672">=</span> data[current_year_mask]<span style="color:#f92672">.</span>loc[:, data<span style="color:#f92672">.</span>columns <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;SPY&#39;</span>]
 </span></span><span style="display:flex;"><span>current_year_spy <span style="color:#f92672">=</span> data[current_year_mask][<span style="color:#e6db74">&#39;SPY&#39;</span>]
-</span></span></code></pre></div><p>Now we can start calculating, the first caluclation we will do is find the covariance matrix for the stocks that we choose.</p>
+</span></span></code></pre></div><p>Now we can start calculating, the first calculation we will do is find the covariance matrix for the stocks that we choose.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>S <span style="color:#f92672">=</span> risk_models<span style="color:#f92672">.</span>CovarianceShrinkage(training_data)<span style="color:#f92672">.</span>ledoit_wolf()
 </span></span></code></pre></div><p>The variance matrix we will shrink using Ledoit and Wolf proposed method in <a href="https://www.sciencedirect.com/science/article/pii/S0047259X03000964" target="_blank">&ldquo;A well-conditioned estimator for large-dimensional covariance matrices&rdquo;</a>
 </p>
@@ -718,7 +717,7 @@ $$<p>Where:</p>
 
 
 
-With a sharpe ratio of &hellip;</p>
+With a Sharpe ratio of <strong>0.8911</strong> (vs SPY 0.86).</p>
 
 <h3 id="results">
   Results
@@ -731,7 +730,7 @@ With a sharpe ratio of &hellip;</p>
  </a>
   
 </h3>
-<p>From this I can conclude that the first phase of the project was definetly a success, the model was able to outperform the S&amp;P 500 with quite the amount. This does not mean that everyone should now invest in the portfolio I calculated, because my personal views were heavily based on what I know this year brought. But it does show the impact of being able to add your own views into the mix when determining how to allocate your portfolio.</p>
+<p>From this I can conclude that the first phase of the project was a success, the model was able to outperform the S&amp;P 500. Although this does not mean that everyone should now invest in the portfolio I calculated, because my personal views were heavily based on what I know this year brought. But it does show the impact of being able to add your own views into the mix when determining how to allocate your portfolio.</p>
 
 <h2 id="everything-needs-ai">
   Everything needs AI
@@ -757,7 +756,21 @@ With a sharpe ratio of &hellip;</p>
  </a>
   
 </h3>
-<p>This part of the project took by far the longest, this was because I needed to find out how to get AI&rsquo;s to behave in the exact way that I want and return me the information I was looking for. At the current stage of AI this is still quite the ask to make. So for this I created a python module to help me out with some of the parts. In this model I build 3 tools for the AI&rsquo;s to use while trying to come up with an answer. These tools consisted of a search engine, this engine was a locally hosted searchxng container which they were able to access through a query. Then I gave them access to the previously mentioned yfinance module, through this they were able to get market information on by them requested stocks, and lastely a P and Q validation tool. This tool was added later into the development, because I kept bumping my head into the problem that the AI&rsquo;s were struggling with formulating these variables correctly.</p>
+<p>This part of the project took by far the longest. The goal was to create an autonomous agent capable of researching the market, selecting promising assets, and formulating mathematical views compatible with the Black-Litterman model.</p>
+<p>I tested three different state-of-the-art models for this task:</p>
+<ul>
+<li><strong>GPT-5 mini</strong> (OpenAI)</li>
+<li><strong>Qwen3</strong> (Alibaba Cloud)</li>
+<li><strong>Grok 4.1 fast</strong> (xAI)</li>
+</ul>
+<p>To enable these models to perform quantitative analysis, I built a custom Python module (<code>llm_specialists</code>) that provides them with three specific tools:</p>
+<ol>
+<li><strong>Market Research Tool</strong>: A connection to a locally hosted <a href="https://github.com/searxng/searxng" target="_blank">SearXNG</a>
+ instance. This allowed the models to query real-time news and sentiment data, overcoming their training data cutoffs.</li>
+<li><strong>Financial Data Tool</strong>: A wrapper around <code>yfinance</code> that allowed the agents to request historical price data, calculate volatility, and check market caps for specific tickers.</li>
+<li><strong>P &amp; Q Validator</strong>: This was the most critical addition. The Black-Litterman model requires precise matrix dimensions for the views \(P\) and expected returns \(Q\). Early tests showed that LLMs struggle with these strict mathematical constraints (e.g., ensuring the weights in a view sum to 0 for relative views or 1 for absolute views). This tool validated their matrices and provided feedback, allowing the models to self-correct before finalizing their output.</li>
+</ol>
+<p>The final output from each agent was a structured object containing their selected tickers, the view matrices (\(P\) and \(Q\)), their confidence levels in those views, and a reasoning string explaining their strategy.</p>
 
 <h3 id="results-1">
   Results
@@ -770,7 +783,7 @@ With a sharpe ratio of &hellip;</p>
  </a>
   
 </h3>
-<p>This time I will not bore you with all the little steps but immediatly show you the results of the great AI Stock trading portfolio allocation competition&hellip;.</p>
+<p>This time I will not bore you with all the little steps but immediately show you the results of the great AI Stock trading portfolio allocation competition&hellip;.</p>
 <p>First of their allocations.</p>
 <p>
 
@@ -854,7 +867,7 @@ Qwen3                      25.32%            0.82
 Grok 4.1 fast              33.45%            0.96
 -------------------------------------------------------
 S&amp;P 500                    18.09%            0.86
-</code></pre><p>So in the end not that promissing&hellip;</p>
+</code></pre><p>So in the end not that promising&hellip;</p>
 
 <h3 id="discussions">
   Discussions
@@ -867,6 +880,15 @@ S&amp;P 500                    18.09%            0.86
  </a>
   
 </h3>
+<p>The results of this project were quite interesting. While the manual model performed exceptionally well, this was largely due to the fact that I had the benefit of hindsight when creating the views. I knew which sectors performed well in 2025, so my &ldquo;views&rdquo; were biased towards those winners.</p>
+<p>The AI models, on the other hand, had to rely on their training data and the tools I provided. The fact that GPT-5 mini and Grok were able to outperform the S&amp;P 500 is a testament to the potential of LLMs in financial analysis. They were able to identify promising sectors and allocate capital accordingly.</p>
+<p>However, the struggle to get consistent P and Q matrices highlights a major challenge: LLMs are great at reasoning but can struggle with precise mathematical structuring without strict guidance. The need for a validation tool shows that we can&rsquo;t yet fully trust these models to operate autonomously in complex quantitative tasks.</p>
+<p>In the future, I would like to expand on this by:</p>
+<ul>
+<li>Automating the view generation process further.</li>
+<li>Experimenting with more advanced agentic workflows.</li>
+<li>Possible fine-tuning of models to see if they can outperform general build models.</li>
+</ul>
 
 
 
