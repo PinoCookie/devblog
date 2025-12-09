@@ -1,6 +1,6 @@
 +++
 date = '2025-12-04T18:20:00+01:00'
-draft = true
+draft = false
 title = 'Black Litterman Model'
 +++
 
@@ -32,7 +32,6 @@ Where:
 - \( \Pi \): \(N \times 1\) vector of prior (equilibrium) expected returns
 - \( \Sigma \): \(N \times N\) covariance matrix of asset returns
 - \( \tau \): scalar tuning constant (reflecting uncertainty in the prior)
-
 
 
 This gives us a good starting point for the code.
